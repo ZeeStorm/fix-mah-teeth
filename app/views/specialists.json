@@ -1,0 +1,34 @@
+{
+	"specialists": [
+		{
+			"id": "AB1",
+			"name": "Steven Shao",
+			"dentistry": "Sunrise Dental",
+			"type": "General Dentist"
+		},
+		{
+			"id": "AB2",
+			"name": "Mai Ong",
+			"dentistry": "Sunrise Dental",
+			"type": "Endodontist"
+		},
+		{
+			"id": "BC1",
+			"name": "John Doe",
+			"dentistry": "New Found Dentistry",
+			"type": "Cosmetic Dentist"
+		},
+		{
+			"id": "BC2",
+			"name": "Jane Doe",
+			"dentistry": "New Found Dentistry",
+			"type": "Oral Pathologist"
+		},
+		{
+			"id": "BC3",
+			"name": "Junior Doe",
+			"dentistry": "New Found Dentistry",
+			"type": "General Dentist"
+		}
+	]
+}

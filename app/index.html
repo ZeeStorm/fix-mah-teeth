@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>YouTube Viewer</title>
+	<!-- build:css styles/main.css -->
+	<link rel="stylesheet" href="styles/main.css">
+	<!-- endbuild -->
+	
+	<!-- build:vendorcss styles/vendor.css -->
+	<link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css">
+	<!-- endbuild -->
+</head>
+
+<body layout="column">
+	<md-toolbar layout="row">
+		<div class="md-toolbar-tools">
+			<h1>Fix Mah Teeth</h1>
+		</div>
+    </md-toolbar>
+    
+	<form>
+		<search-input></search-input>
+	</form>
+
+	<div class="container-fluid ng-cloak">
+		<aside ng-controller="SearchListCtrl">
+			<div>
+				<h5>Previous Searches</h5>
+				<ul>
+					<li ng-repeat="previousSearch in searches track by $index">
+						<a ui-sref="specialists({query: previousSearch})">{{ previousSearch }}</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+		<main>
+			<div ui-view></div>
+		</main>
+	</div>
+
+	<!-- build:vendorjs scripts/vendor.js -->
+	<script src="lib/jquery/dist/jquery.js"></script>
+	<script src="lib/angular/angular.js"></script>
+	<script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
+	<!-- endbuild -->
+
+	<script src="scripts/init.js"></script>
+
+</body>
+</html>

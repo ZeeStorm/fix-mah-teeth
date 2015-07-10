@@ -1,0 +1,13 @@
+{
+  "name": "fix-my-mouth",
+  "version": "0.0.0",
+  "authors": [
+    "James <james@hartsolution.com>"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "angular": "~1.4.2",
+    "angular-ui-router": "~0.2.15"
+  },
+  "appPath": "app"
+}
