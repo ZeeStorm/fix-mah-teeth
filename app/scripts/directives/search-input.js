@@ -16,16 +16,13 @@ var SearchInput = ($state, Specialists) => {
 
 			link(scope, el, attrs) {
 				var triggerSearch = () => {
-					$state.go('search');
-					Specialists.handleInput(scope.query);
+					$state.go('specialists', { query: scope.query });
 				};
 
 				el.bind('keydown', (e) => {
 					if (e.keyCode === 13) {
 						triggerSearch();
 					}
-				}).bind('search', () => {
-					triggerSearch();
 				});
 
 				scope.resetQuery = () => {

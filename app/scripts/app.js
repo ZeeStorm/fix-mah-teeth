@@ -40,6 +40,7 @@ appConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 
 angular.module( mouthApp, [
 		'ui.router',
+		'ngMaterial',
 		config,
 		services,
 		controllers,

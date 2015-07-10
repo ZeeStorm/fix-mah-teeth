@@ -1,0 +1,11 @@
+<div>
+	<h5>Current Dentists:</h5>
+	<ul>
+		<li ng-repeat="saved_specialist in specialists track by $index">
+			<a ui-sref="appointments({id: saved_specialist.id})" title="{{ saved_specialist.type }} at {{ saved_specialist.dentistry }} in {{ saved_specialist.location }}">{{ saved_specialist.name }}</a>
+			<small ng-if="appointments[saved_specialist.id]">
+				( <em><strong>{{ appointments[ saved_specialist.id ].length }}</strong> upcoming appointment{{ appointments[ saved_specialist.id ].length == 1 ? '' : 's' }}</em> )
+			</small>
+		</li>
+	</ul>
+</div>

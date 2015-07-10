@@ -16,10 +16,7 @@ var SpecialistsCtrl = ($rootScope, $scope, $stateParams, Specialists) => {
 	};
 
 	if ( $stateParams.query ) {
-		var searchScope = angular.element( '.search-input' ).scope();
-		
-		searchScope.query = $stateParams.query;
-		angular.element( '.search-input input' ).trigger( 'search' );
+		Specialists.handleSearch( $stateParams.query );
 	};
 	
 	// set up watchers
@@ -52,4 +49,4 @@ var SpecialistsCtrl = ($rootScope, $scope, $stateParams, Specialists) => {
 
 SpecialistsCtrl.$inject = ['$rootScope', '$scope', '$stateParams', 'Specialists'];
 
-export default SearchCtrl;
+export default SpecialistsCtrl;

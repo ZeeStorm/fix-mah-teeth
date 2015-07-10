@@ -14,6 +14,7 @@ import Appointments from './services/appointments';
  * Controllers
  */
 import DashboardCtrl from './controllers/dashboard';
+import SearchListCtrl from './controllers/searchList';
 import SpecialistsCtrl from './controllers/specialists';
 import AppointmentsCtrl from './controllers/appointments';
 
@@ -50,6 +51,7 @@ angular.module(services, [])
 angular.module(controllers, [])
 	.controller('DashboardCtrl', DashboardCtrl)
 	.controller('SpecialistsCtrl', SpecialistsCtrl)
+	.controller('SearchListCtrl', SearchListCtrl)
 	.controller('AppointmentsCtrl', AppointmentsCtrl);
 
 /**

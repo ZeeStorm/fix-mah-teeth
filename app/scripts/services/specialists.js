@@ -1,6 +1,6 @@
 'use strict';
 
-var Specialists = ($q, $rootScope, $sanitize, $timeout, $http, config) => {
+var Specialists = ($q, $rootScope, $timeout, $http, config) => {
 	// get searches from local storage
 	var searches = localStorage.getItem( 'specialists-searches' );
 	
@@ -32,6 +32,7 @@ var Specialists = ($q, $rootScope, $sanitize, $timeout, $http, config) => {
 		saved: saved || [],
 
 		query: '',
+		isLoading: false, // because we could have a web service call.. simulate with timeout
 		
 		loadSpecialists() {
 			console.log( 'loading specialists..' );
@@ -53,12 +54,12 @@ var Specialists = ($q, $rootScope, $sanitize, $timeout, $http, config) => {
 			
 			return false;
 		},
-		
-		isLoading: false, // because we could have a web service call.. simulate with timeout
 
 		saveSpecialist( id ) {
-			if ( this.saved.indexOf( id ) => -1 ) {
+			if ( this.saved.indexOf( id ) == -1 ) {
 				this.saved.unshift( id );
+				
+				localStorage.setItem( 'specialists-saved', JSON.stringify( this.saved ) );
 			}
 		},
 
@@ -81,6 +82,7 @@ var Specialists = ($q, $rootScope, $sanitize, $timeout, $http, config) => {
 							// look for a match after normalize
 							if ( ( "" + this.specialists[ i ][ k ] ).toLowerCase().search( query ) > -1 ) {
 								items.push( this.specialists[ i ] );
+								break;
 							}
 						}
 					}
@@ -94,7 +96,7 @@ var Specialists = ($q, $rootScope, $sanitize, $timeout, $http, config) => {
 				{
 					deferred.reject();
 				}
-			}, 1000 );
+			}, 500 );
 
 			return deferred.promise;
 		},
@@ -107,15 +109,17 @@ var Specialists = ($q, $rootScope, $sanitize, $timeout, $http, config) => {
 			while ( this.searches.length > 10 ) {
 				this.searches.pop();
 			}
+			
+			localStorage.setItem( 'specialists-searches', JSON.stringify( this.searches ) );
 		},
 
-		handleInput(val) {
+		handleSearch(val) {
 			// set our query.. even if blank
 			this.query = val;
 			
 			// add to our recent searches
 			if (val) {
-				this.searches.unshift( val );
+				this._appendSearch( val );
 
 				this.searchSpecialists(val).then(
 					// resolved
@@ -134,6 +138,6 @@ var Specialists = ($q, $rootScope, $sanitize, $timeout, $http, config) => {
 	};
 };
 
-Search.$inject = ['$q', '$rootScope', '$sanitize', '$timeout', '$http', 'config'];
+Specialists.$inject = ['$q', '$rootScope', '$timeout', '$http', 'config'];
 
-export default Search;
+export default Specialists;

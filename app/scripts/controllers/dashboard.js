@@ -3,44 +3,51 @@
 /**
  * Dashboard Controller
  */
-var DashboardCtrl = ($scope, Specialists) => {
+var DashboardCtrl = ($scope, Specialists, Appointments) => {
 	$scope.saved = [];
-	$scope.searches = [];
+	$scope.specialists = [];
+	$scope.appointments = {};
 
-	// watch for previous searches array changes
+	// this could do a better xor instead of replacing the array everytime..
+	function reloadSpecialists() {
+		if ( $scope.saved.length ) {
+			var saved_specialists = [],
+				specialist;
+			
+			// pull in information for each
+			for ( var i = 0, len = $scope.saved.length; i < len; ++i ) {
+				specialist = Specialists.getSpecialistById( $scope.saved[ i ] );
+				
+				// ensure specialist is not false
+				if ( specialist ) {
+					saved_specialists.push( specialist );
+				}
+			}
+			
+			$scope.specialists = saved_specialists;
+		} else {
+			$scope.specialists = [];
+		}
+	};
+
+	// watch for saved array changes
 	$scope.$watch(() => {
-		return Search.searches;
+		return Specialists.saved;
 	}, (val) => {
-		$scope.searches = val || [];
+		$scope.saved = val;
+		
+		// get our details and put them into specialists
+		reloadSpecialists();
 	});
 
 	// watch for saved array changes
 	$scope.$watch(() => {
-		return Search.saved;
+		return Appointments.saved;
 	}, (val) => {
-		val = val || [];
-		
-		if ( val.length ) {
-			var saved = [],
-				specialist;
-			
-			// pull in information for each
-			for ( var i = 0, len = val.length; i < len; ++i ) {
-				specialist = Specialists.getSpecialistById( val[ i ] );
-				
-				// ensure specialist is not false
-				if ( specialist ) {
-					saved.push( specialist );
-				}
-			}
-			
-			$scope.saved = saved;
-		} else {
-			$scope.saved = [];
-		}
-	});
+		$scope.appointments = val || {};
+	}, true);
 };
 
-DashboardCtrl.$inject = ['$scope', 'Search'];
+DashboardCtrl.$inject = ['$scope', 'Specialists', 'Appointments'];
 
 export default DashboardCtrl;

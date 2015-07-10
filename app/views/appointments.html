@@ -1,0 +1,30 @@
+<section class="search-results">
+	<div ng-if="appointments.length">
+		<h3>Upcoming Appointments:</h3>
+		<ul>
+			<li ng-repeat="appointment in appointments">
+				{{ appointment.month }}/{{ appointment.day }}/{{ appointment.year }} at {{ appointment.timeslot }}
+			</li>
+		</ul>
+	</div>
+	<form ng-submit="addAppointment()">
+		<div layout="row">
+			<md-select ng-model="data.month" placeholder="Month">
+				<md-option ng-value="$index + 1" ng-repeat="obj in months track by $index">{{ obj }}</md-option>
+			</md-select>
+			<md-select ng-model="data.day" placeholder="Day">
+				<md-option ng-value="obj" ng-repeat="obj in days">{{ obj }}</md-option>
+			</md-select>
+			<md-select ng-model="data.year" placeholder="Year">
+				<md-option ng-value="obj" ng-repeat="obj in years">{{ obj }}</md-option>
+			</md-select>
+			<md-select ng-model="data.timeslot" placeholder="Select a Time">
+				<md-option ng-value="obj.text" ng-repeat="obj in times">{{ obj.text }}</md-option>
+			</md-select>
+		</div>
+		<div layout="row">
+			<md-button class="md-raised md-primary" type="submit">Add Appointment</md-button>
+			<md-button class="md-raised" ui-sref="dashboard">Back to Dashboard</md-button>
+		</div>
+	</form>
+</section>
